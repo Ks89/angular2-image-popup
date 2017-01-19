@@ -1,7 +1,7 @@
 {
-  "name": "angular2-image-popup",
+  "name": "angular-modal-gallery",
   "authors": [
-    "Vimala A (vimalamca1991@gmcail.com)"
+    "Stefano Cappa (stefano.cappa.ks89@gmail.com)"
   ],
   "description": "Image popup directive for angular2",
   "main": "",
@@ -10,14 +10,20 @@
     "node"
   ],
   "keywords": [
-    "angular2",
-    "angular2-image-popup",
-  "angular2-image",
-  "image-popup",
-  "popup",
-  "modal",
-  "angular2-modal-popup",
-  "modal-popup"
+    "angular-modal-gallery",
+    "angular2-gsllery",
+    "angular2-modal-gallery",
+    "angular2-modal",
+    "modal-gallery",
+    "angular4-modal-gallery",
+    "angular4-modal",
+    "popup",
+    "modal",
+    "angular2-modal-popup",
+    "angular4-modal-popup",
+    "angular2-modal",
+    "angular4-modal",
+    "modal-popup"
   ],
   "license": "MIT",
   "homepage": "",

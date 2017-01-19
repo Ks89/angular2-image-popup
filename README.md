@@ -1,17 +1,22 @@
-Angular2 image popup
-=========
+# Angular modal gallery (--- work in progress ---)
 
-The sources for this package are in (https://github.com/vimalavinisha/angular2-image-popup) repo. Please file issues and pull requests against this repo.
+Forked from [THIS REPO](https://github.com/vimalavinisha/angular2-image-popup) and improved.
+
+The sources for this package are in (https://github.com/Ks89/angular2-image-popup) repo.
+Please file issues and pull requests against this repo.
 
 ## Demo Output
+
   ![angular2-image-popup](https://cloud.githubusercontent.com/assets/11042288/16330239/78a57df6-3a05-11e6-98b9-7414c0eaf794.png)
   ![popup](https://cloud.githubusercontent.com/assets/11042288/16330244/861f3cc4-3a05-11e6-8757-7baf315eda8c.png)
-##Usage
-    node install
-      npm install angular2-image-popup
-    bower install
-      bower install image-popup
-###1.In index.html page include following css 
+
+## Installation
+- npm: `STILL NOT AVAILABLE`
+- bower `STILL NOT AVAILABLE`
+
+## Setup
+
+###1.In index.html page include following css
       <link rel="stylesheet" type="text/css" href="directives/angular2-image-popup/css/style.css">
       <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.css">
       <link rel="stylesheet" type="text/css" href="app/assets/css/main.css">
@@ -70,3 +75,29 @@ The sources for this package are in (https://github.com/vimalavinisha/angular2-i
          this.openModalWindow = false;
        }
       }
+
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2017 Stefano Cappa (Ks89)
+Copyright (c) 2016 vimalavinisha
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

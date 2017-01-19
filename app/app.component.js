@@ -1,9 +1,8 @@
 /*
  * @author Vimala A
  */
-System.register(['@angular/core'], function(exports_1, context_1) {
+System.register(["@angular/core"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13,14 +12,17 @@ System.register(['@angular/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var AppComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, AppComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {/*
+             * @author Vimala A
+             */
             AppComponent = (function () {
                 function AppComponent() {
                     this.openModalWindow = false;
@@ -47,17 +49,17 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 AppComponent.prototype.cancelImageModel = function () {
                     this.openModalWindow = false;
                 };
-                AppComponent = __decorate([
-                    core_1.Component({
-                        selector: 'my-app',
-                        template: "\n      <h2> Example - Default</h2>\n      <p> you can directly access \"ImageModel\" directive for both listing thumbnails and popup images</p>\n\n      <ImageModal [modalImages]=\"images\"></ImageModal>\n      <h2>  Example with thumbnail pointers </h2>\n      <p> you can list images in your file and then calling \"ImageModel\" directive to show images on popup only</p>\n      <div *ngFor=\"let img of images; let i= index\"> \n        <div class=\"float-left\" *ngIf=\"i <= 2\" >\n          <a class=\"more\" *ngIf=\"i==2\" (click)=\"OpenImageModel(img.img,images)\"> +{{images.length - 3}} more </a> \n          <img class=\"list-img\" src=\"{{img.thumb}}\"(click)=\"OpenImageModel(img.img,images)\" alt='Image' />\n        </div>\n      </div>\n      <div *ngIf=\"openModalWindow\">\n        <ImageModal [modalImages]=\"images\" [imagePointer] = \"imagePointer\" (cancelEvent) =\"cancelImageModel()\"></ImageModal>\n      </div>\n\t"
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], AppComponent);
                 return AppComponent;
             }());
+            AppComponent = __decorate([
+                core_1.Component({
+                    selector: 'my-app',
+                    template: "\n      <h2> Example - Default</h2>\n      <p> you can directly access \"ImageModel\" directive for both listing thumbnails and popup images</p>\n\n      <ImageModal [modalImages]=\"images\"></ImageModal>\n      <h2>  Example with thumbnail pointers </h2>\n      <p> you can list images in your file and then calling \"ImageModel\" directive to show images on popup only</p>\n      <div *ngFor=\"let img of images; let i= index\"> \n        <div class=\"float-left\" *ngIf=\"i <= 2\" >\n          <a class=\"more\" *ngIf=\"i==2\" (click)=\"OpenImageModel(img.img,images)\"> +{{images.length - 3}} more </a> \n          <img class=\"list-img\" src=\"{{img.thumb}}\"(click)=\"OpenImageModel(img.img,images)\" alt='Image' />\n        </div>\n      </div>\n      <div *ngIf=\"openModalWindow\">\n        <ImageModal [modalImages]=\"images\" [imagePointer] = \"imagePointer\" (cancelEvent) =\"cancelImageModel()\"></ImageModal>\n      </div>\n\t"
+                }),
+                __metadata("design:paramtypes", [])
+            ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=app.component.js.map

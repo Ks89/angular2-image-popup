@@ -1,1 +1,1 @@
-{"version":3,"file":"image-modal-popup.js","sourceRoot":"","sources":["image-modal-popup.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;YAIA,oBAAe;gBACX,UAAU,EAAE,CAAC,iCAAU,CAAC;aAC3B,EAAA"}
+{"version":3,"file":"image-modal-popup.js","sourceRoot":"","sources":["image-modal-popup.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;iCAIe;gBACX,UAAU,EAAE,CAAC,iCAAU,CAAC;aAC3B;QACD,CAAC"}
