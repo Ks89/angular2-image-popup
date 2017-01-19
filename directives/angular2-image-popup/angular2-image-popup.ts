@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, HostListener} from '@angular/core';
 
 @Component({
   selector: 'ImageModal',
@@ -34,6 +34,7 @@ export class ImageModal implements OnInit {
   constructor(public element: ElementRef) {
     this._element = this.element.nativeElement;
   }
+
   @HostListener('window:keydown', ['$event'])
   onKeyDown(e) {
     if (!this.opened) {
@@ -49,6 +50,7 @@ export class ImageModal implements OnInit {
       this.nextImage();
     }
   }
+
   ngOnInit() {
     this.loading = true;
     if (this.imagePointer >= 0) {
