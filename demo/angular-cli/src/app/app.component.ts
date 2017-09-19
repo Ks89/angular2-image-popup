@@ -22,7 +22,7 @@
  SOFTWARE.
  */
 
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Image, Action, ImageModalEvent, Description} from 'angular-modal-gallery';
 import {Observable} from 'rxjs/Observable';
@@ -35,7 +35,7 @@ import 'rxjs/add/operator/delay';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnDestroy, OnInit {
 
   openModalWindow: boolean = false;
   imagePointer: number = 0;
