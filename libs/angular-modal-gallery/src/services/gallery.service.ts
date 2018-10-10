@@ -23,16 +23,24 @@
  */
 
 import { EventEmitter, Injectable } from '@angular/core';
+import { Image } from '../model/image.class';
 
 export interface InternalGalleryPayload {
   galleryId: number;
   index: number;
 }
 
+export interface InternalGalleryRefresh{
+  galleryId:number|string;
+  imageIndex: number;
+  images:Image[];
+}
+
 @Injectable()
 export class GalleryService {
   navigate: EventEmitter<InternalGalleryPayload> = new EventEmitter<InternalGalleryPayload>();
   close: EventEmitter<number> = new EventEmitter<number>();
+  refresh:EventEmitter<InternalGalleryRefresh> = new EventEmitter<InternalGalleryRefresh>();
 
   openGallery(galleryId: number | undefined, index: number): void {
     if (galleryId === undefined || galleryId < 0 || index < 0) {
@@ -49,5 +57,13 @@ export class GalleryService {
       throw new Error('Cannot close gallery via GalleryService with galleryId<0 or galleryId===undefined');
     }
     this.close.emit(galleryId);
+  }
+
+  refreshGallery(galleryId:number|string,imageIndex:number, images :Image[]):void{
+    this.refresh.emit({
+      galleryId: galleryId,
+      imageIndex:imageIndex,
+      images: images
+    })
   }
 }

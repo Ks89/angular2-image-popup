@@ -48,7 +48,7 @@ import { PreviewConfig } from '../../model/preview-config.interface';
 import { SlideConfig } from '../../model/slide-config.interface';
 import { AccessibilityConfig } from '../../model/accessibility.interface';
 import { KeyboardService } from '../../services/keyboard.service';
-import { GalleryService, InternalGalleryPayload } from '../../services/gallery.service';
+import { GalleryService, InternalGalleryPayload, InternalGalleryRefresh } from '../../services/gallery.service';
 import { DotsConfig } from '../../model/dots-config.interface';
 import { CurrentImageComponent, ImageLoadEvent } from '../current-image/current-image.component';
 import { InternalLibImage } from '../../model/image-internal.class';
@@ -73,7 +73,7 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
    * the service to call modal gallery without open it manually.
    * Right now is optional, but in upcoming major releases will be mandatory!!!
    */
-  @Input() id: number;
+  @Input() id: number|string;
   /**
    * Array of `Image` that represent the model of this library with all images, thumbs and so on.
    */
@@ -177,6 +177,7 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
 
   private galleryServiceNavigateSubscription: Subscription;
   private galleryServiceCloseSubscription: Subscription;
+  private galleryServiceRefreshSubscription:Subscription;
 
   /**
    * Constructor with the injection of ´KeyboardService´ and an object to support Server-Side Rendering.
@@ -226,6 +227,30 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
       }
       this.closeGallery(Action.NORMAL, true);
     });
+
+    this.galleryServiceRefreshSubscription = this.galleryService.refresh.subscribe((payload:InternalGalleryRefresh)=>{
+      if (!payload){
+        return;
+      }
+      // if galleryId is not valid OR galleryId is related to another instance and not this one
+      if (payload.galleryId === undefined || payload.galleryId < 0 || payload.galleryId !== this.id) {
+        return;
+      }
+      // if image index is not valid
+      if (payload.imageIndex < 0 || payload.imageIndex > this.images.length) {
+        return;
+      }
+      
+      
+      this.modalImages = payload.images;
+      this.initImages();
+     
+      this.onChangeCurrentImage(new ImageModalEvent(Action.NORMAL, payload.imageIndex))
+    
+      
+
+
+    })
   }
 
   /**
@@ -577,6 +602,9 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
     }
     if (this.galleryServiceCloseSubscription) {
       this.galleryServiceCloseSubscription.unsubscribe();
+    }
+    if (this.galleryServiceRefreshSubscription){
+      this.galleryServiceRefreshSubscription.unsubscribe();
     }
   }
 
