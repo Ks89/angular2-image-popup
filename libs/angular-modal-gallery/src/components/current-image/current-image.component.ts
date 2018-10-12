@@ -63,14 +63,17 @@ export interface ImageLoadEvent {
 })
 export class CurrentImageComponent extends AccessibleComponent implements OnInit, OnChanges {
 
+  /**
+   * client api used for make a call asynchronous
+   * usefull particullary if the clientApi is an injectable class
+   */
   @Input() clientApi: any;
 
   /**
    * Allow user to load the modal picture when he clic on the gallery, in asynchronous way
    *
    * */
-  
-  @Input() onLoadCurrentImage: (clientApi:any, currentImageId: number | string) => Promise<string | SafeResourceUrl>;
+  @Input() onLoadCurrentImage: (clientApi: any, currentImageId: number | string) => Promise<string | SafeResourceUrl>;
 
   /**
    * Object of type `InternalLibImage` that represent the visible image.
