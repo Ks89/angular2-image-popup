@@ -31,7 +31,7 @@ import { Image, ModalImage, PlainImage } from './image.class';
 export class InternalLibImage extends Image {
   previouslyLoaded: boolean;
 
-  constructor(id: number, modal: ModalImage, plain?: PlainImage, previouslyLoaded: boolean = false) {
+  constructor(id: number |string, modal: ModalImage, plain?: PlainImage, previouslyLoaded: boolean = false) {
     super(id, modal, plain);
 
     this.previouslyLoaded = previouslyLoaded;

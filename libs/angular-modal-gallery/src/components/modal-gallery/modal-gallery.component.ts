@@ -40,6 +40,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 import { ButtonEvent, ButtonsConfig } from '../../model/buttons-config.interface';
 import { Image, ImageModalEvent } from '../../model/image.class';
@@ -75,8 +76,7 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
    * the service to call modal gallery without open it manually.
    * Right now is optional, but in upcoming major releases will be mandatory!!!
    */
-  @Input()
-  id: number;
+  @Input()id: number | string;  
   /**
    * Array of `Image` that represent the model of this library with all images, thumbs and so on.
    */
@@ -135,6 +135,19 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
    */
   @Input()
   plainGalleryConfig: PlainGalleryConfig;
+
+  /**
+   * client api used for make a call asynchronous
+   * usefull particullary if the clientApi is an injectable class
+   */
+  @Input() clientApi: any;
+
+  /**
+   * Allow user to load the modal picture when he clic on the gallery, in asynchronous way
+   *
+   * */
+  @Input() onLoadCurrentImage: (clientApi: any, currentImageId: number | string) => Promise<string | SafeResourceUrl>;
+
 
   /**
    * Output to emit an event when the modal gallery is closed.

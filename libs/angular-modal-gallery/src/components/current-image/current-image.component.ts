@@ -39,6 +39,8 @@ import { SlideConfig } from '../../model/slide-config.interface';
 import { NEXT, PREV } from '../../utils/user-input.util';
 import { getIndex } from '../../utils/image.util';
 import { CurrentImageConfig } from '../../model/current-image-config.interface';
+import { SafeResourceUrl } from '@angular/platform-browser';
+
 
 /**
  * Interface to describe the Load Event, used to
@@ -47,7 +49,7 @@ import { CurrentImageConfig } from '../../model/current-image-config.interface';
 export interface ImageLoadEvent {
   status: boolean;
   index: number;
-  id: number;
+  id: number | string;
 }
 
 /**
@@ -60,6 +62,16 @@ export interface ImageLoadEvent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrentImageComponent extends AccessibleComponent implements OnInit, OnChanges {
+
+  @Input() clientApi: any;
+
+  /**
+   * Allow user to load the modal picture when he clic on the gallery, in asynchronous way
+   *
+   * */
+  
+  @Input() onLoadCurrentImage: (clientApi:any, currentImageId: number | string) => Promise<string | SafeResourceUrl>;
+
   /**
    * Object of type `InternalLibImage` that represent the visible image.
    */
@@ -156,6 +168,7 @@ export class CurrentImageComponent extends AccessibleComponent implements OnInit
     UP: 'swipeup',
     DOWN: 'swipedown'
   };
+
 
   /**
    * Method ´ngOnInit´ to build `configCurrentImage` applying default values.
@@ -390,14 +403,36 @@ export class CurrentImageComponent extends AccessibleComponent implements OnInit
    * @param Event event that triggered the load
    */
   onImageLoad(event: Event) {
+
+    //if onLoadCurrentImage is defined, try to download the "full def" img externaly and asynchronously
+    if (this.currentImage.id && !this.currentImage.previouslyLoaded && this.onLoadCurrentImage && this.clientApi) {
+
+
+      this.onLoadCurrentImage(this.clientApi,this.currentImage.id).then((newbase64str: string | SafeResourceUrl) => {
+        if (newbase64str){
+          this.currentImage.modal.img = newbase64str;
+          this.currentImage.previouslyLoaded = true;
+        }
+        
+        this.emitLoadEvent();
+      }, error => {
+        //if there is any error, deal with the regular way.
+        this.emitLoadEvent();
+      });
+
+    } else {
+      this.emitLoadEvent();
+    }
+
+  }
+
+  private emitLoadEvent() {
     const loadImageData: ImageLoadEvent = {
       status: true,
       index: getIndex(this.currentImage, this.images),
       id: this.currentImage.id
     };
-
     this.loadImage.emit(loadImageData);
-
     this.loading = false;
   }
 

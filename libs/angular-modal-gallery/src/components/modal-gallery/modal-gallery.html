@@ -32,6 +32,8 @@
                         [keyboardConfig]="keyboardConfig"
                         [accessibilityConfig]="accessibilityConfig"
                         [currentImageConfig]="currentImageConfig"
+                        [onLoadCurrentImage]="onLoadCurrentImage"
+                        [clientApi]="clientApi"
                         (loadImage)="onImageLoad($event)"
                         (changeImage)="onChangeCurrentImage($event)"
                         (close)="onCloseGallery($event)"></ks-current-image>

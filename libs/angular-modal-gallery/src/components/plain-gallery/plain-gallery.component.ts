@@ -218,7 +218,7 @@ export class PlainGalleryComponent implements OnInit, OnChanges {
    * @param Image item of the array
    * @returns number the id of the item
    */
-  trackById(index: number, item: Image): number {
+  trackById(index: number, item: Image): number | string {
     return item.id;
   }
 

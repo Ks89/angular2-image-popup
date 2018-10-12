@@ -218,7 +218,7 @@ export class PreviewsComponent extends AccessibleComponent implements OnInit, On
    * @param Image item of the array
    * @returns number the id of the item
    */
-  trackById(index: number, item: Image): number {
+  trackById(index: number, item: Image): number |string {
     return item.id;
   }
 
