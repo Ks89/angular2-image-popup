@@ -48,7 +48,7 @@ import { PreviewConfig } from '../../model/preview-config.interface';
 import { SlideConfig } from '../../model/slide-config.interface';
 import { AccessibilityConfig } from '../../model/accessibility.interface';
 import { KeyboardService } from '../../services/keyboard.service';
-import { GalleryService, InternalGalleryPayload, InternalGalleryRefresh } from '../../services/gallery.service';
+import { GalleryService, InternalGalleryPayload } from '../../services/gallery.service';
 import { DotsConfig } from '../../model/dots-config.interface';
 import { CurrentImageComponent, ImageLoadEvent } from '../current-image/current-image.component';
 import { InternalLibImage } from '../../model/image-internal.class';
