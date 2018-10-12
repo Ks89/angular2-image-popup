@@ -660,4 +660,23 @@ export class AppComponent {
   private getCurrentIndexCustomLayout(image: Image, images: Image[]): number {
     return image ? images.indexOf(image) : -1;
   }
+
+  onLoadCurrentImage(currentImageId: string): Promise<string> {
+    if (currentImageId) {
+      //make an eternal call (to a server witch contains full definition image equivalent as base64 string)
+      //wait for the response and send it back to the component
+
+      // return this.myclientApi.getPictureFullScreenById(currentImageId).toPromise().then(
+      //   data => {
+      //     return data.fullscreen;
+      //   },
+      //   error => {
+      //     return undefined;
+      //   }
+      // )
+    } else {
+      return undefined;
+    }
+    
+  }
 }

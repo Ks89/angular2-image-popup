@@ -34,7 +34,8 @@
                         [currentImageConfig]="currentImageConfig"
                         (loadImage)="onImageLoad($event)"
                         (changeImage)="onChangeCurrentImage($event)"
-                        (close)="onCloseGallery($event)"></ks-current-image>
+                        (close)="onCloseGallery($event)"
+                        [onLoadCurrentImage]="onLoadCurrentImage"></ks-current-image>
 
       <div>
         <ks-dots [images]="images"

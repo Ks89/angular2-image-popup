@@ -68,12 +68,19 @@ import { CurrentImageConfig } from '../../model/current-image-config.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
+ /**
+   * Allow user to load the modal picture when he clic on the gallery, in asynchronous way
+   *
+   * */
+  @Input()
+  onLoadCurrentImage: (value: number | string) => Promise<string>;
+
   /**
    * Unique id (>=0) of the current instance of this library. This is useful when you are using
    * the service to call modal gallery without open it manually.
    * Right now is optional, but in upcoming major releases will be mandatory!!!
    */
-  @Input() id: number|string;
+  @Input() id: number | string;
   /**
    * Array of `Image` that represent the model of this library with all images, thumbs and so on.
    */
@@ -177,7 +184,7 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
 
   private galleryServiceNavigateSubscription: Subscription;
   private galleryServiceCloseSubscription: Subscription;
-  private galleryServiceRefreshSubscription:Subscription;
+  
 
   /**
    * Constructor with the injection of ´KeyboardService´ and an object to support Server-Side Rendering.
@@ -187,7 +194,7 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
     private galleryService: GalleryService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) { }
 
   /**
    * Method ´ngOnInit´ to init images calling `initImages()`.
@@ -199,7 +206,7 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
     if ((!this.id && this.id !== 0) || this.id < 0) {
       throw new Error(
         `'[id]="a number >= 0"' is a mandatory input from 6.0.0 in angular-modal-gallery.` +
-          `If you are using multiple instances of this library, please be sure to use different ids`
+        `If you are using multiple instances of this library, please be sure to use different ids`
       );
     }
 
@@ -226,31 +233,7 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
         return;
       }
       this.closeGallery(Action.NORMAL, true);
-    });
-
-    this.galleryServiceRefreshSubscription = this.galleryService.refresh.subscribe((payload:InternalGalleryRefresh)=>{
-      if (!payload){
-        return;
-      }
-      // if galleryId is not valid OR galleryId is related to another instance and not this one
-      if (payload.galleryId === undefined || payload.galleryId < 0 || payload.galleryId !== this.id) {
-        return;
-      }
-      // if image index is not valid
-      if (payload.imageIndex < 0 || payload.imageIndex > this.images.length) {
-        return;
-      }
-      
-      
-      this.modalImages = payload.images;
-      this.initImages();
-     
-      this.onChangeCurrentImage(new ImageModalEvent(Action.NORMAL, payload.imageIndex))
-    
-      
-
-
-    })
+    });   
   }
 
   /**
@@ -602,10 +585,7 @@ export class ModalGalleryComponent implements OnInit, OnDestroy, OnChanges {
     }
     if (this.galleryServiceCloseSubscription) {
       this.galleryServiceCloseSubscription.unsubscribe();
-    }
-    if (this.galleryServiceRefreshSubscription){
-      this.galleryServiceRefreshSubscription.unsubscribe();
-    }
+    }   
   }
 
   /**

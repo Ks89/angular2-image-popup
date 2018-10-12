@@ -31,12 +31,11 @@ import { SafeResourceUrl } from '@angular/platform-browser';
  * Both image `id` and `modal` are mandatory, instead `plain` is optional.
  */
 export class Image {
-  id: number;
-
+  id: number|string;
   modal: ModalImage;
   plain?: PlainImage;
-
-  constructor(id: number, modal: ModalImage, plain?: PlainImage) {
+  
+  constructor(id: number|string, modal: ModalImage, plain?: PlainImage) {
     this.id = id;
     this.modal = modal;
     this.plain = plain;
