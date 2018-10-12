@@ -466,15 +466,21 @@
                     [slideConfig]="{infinite: true, sidePreviews: {show: true, size: {width: '100px', height: 'auto'}}}"
                     (show)="autoAddImage()"></ks-modal-gallery>
 </section>
+
+<section>
+  <h3>D5 - (id=56) - Other demo - automatic update of the second image via gallery service (open the second image and wait some seconds to see the result)</h3>
+  <br>
+  <ks-modal-gallery [id]="56" [modalImages]="images" (show)="autoUpdateImage(56, 1)"></ks-modal-gallery>
+</section>
 <br>
 <hr>
 <br>
 <h2>Experimental examples<sup>*</sup></h2>
 <p><sup>*</sup> these will be either improved or removed in next versions</p>
 <section>
-  <h3>E1 - (id=56) - Experimental demo - infinite sliding with only one image to see if side arrows are hidden</h3>
+  <h3>E1 - (id=57) - Experimental demo - infinite sliding with only one image to see if side arrows are hidden</h3>
   <br>
-  <ks-modal-gallery [id]="56" [modalImages]="[images[0]]"
+  <ks-modal-gallery [id]="57" [modalImages]="[images[0]]"
                     [keyboardConfig]="null"
                     [currentImageConfig]="currentImageConfigExperimental"
                     [slideConfig]="{infinite: false}"></ks-modal-gallery>

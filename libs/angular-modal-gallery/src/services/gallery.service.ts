@@ -23,20 +23,20 @@
  */
 
 import { EventEmitter, Injectable } from '@angular/core';
-
+import { Image } from '../model/image.class';
 
 export interface InternalGalleryPayload {
   galleryId: number;
   index: number;
+  image?: Image;
 }
-
-
 
 @Injectable()
 export class GalleryService {
   navigate: EventEmitter<InternalGalleryPayload> = new EventEmitter<InternalGalleryPayload>();
   close: EventEmitter<number> = new EventEmitter<number>();
- 
+  update: EventEmitter<InternalGalleryPayload> = new EventEmitter<InternalGalleryPayload>();
+
   openGallery(galleryId: number | undefined, index: number): void {
     if (galleryId === undefined || galleryId < 0 || index < 0) {
       throw new Error('Cannot open gallery via GalleryService with either index<0 or galleryId<0 or galleryId===undefined');
@@ -52,5 +52,19 @@ export class GalleryService {
       throw new Error('Cannot close gallery via GalleryService with galleryId<0 or galleryId===undefined');
     }
     this.close.emit(galleryId);
-  } 
+  }
+
+  updateGallery(galleryId: number | undefined, index: number, image: Image): void {
+    if (galleryId === undefined || galleryId < 0 || index < 0) {
+      throw new Error('Cannot update gallery via GalleryService with either index<0 or galleryId<0 or galleryId===undefined');
+    }
+    if (!image) {
+      throw new Error('Cannot update gallery via GalleryService, because image is not valid');
+    }
+    this.update.emit({
+      galleryId: galleryId,
+      index: index,
+      image: image
+    });
+  }
 }

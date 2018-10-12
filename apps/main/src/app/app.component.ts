@@ -675,6 +675,18 @@ export class AppComponent {
     }, 2000);
   }
 
+  autoUpdateImage(id: number, indexToRefresh: number) {
+    console.log('updating image at index ' + indexToRefresh + ', after 2 seconds');
+    const image: Image = new Image(1, {
+        img: '../assets/images/gallery/img5.jpg',
+        description: 'Description 2 updated with imag5.jpg'
+      });
+    setTimeout(() => {
+      console.log('image updated');
+      this.galleryService.updateGallery(id, indexToRefresh, image);
+    }, 2000);
+  }
+
   openModalViaService(id: number | undefined, index: number) {
     console.log('opening gallery with index ' + index);
     this.galleryService.openGallery(id, index);

@@ -1,3 +1,14 @@
+# 6.3.0
+### Features
+- add a new method called 'update' into GalleryService to be able to update an image of the gallery calling this method, also when modal-gallery is already opened #161 
+  (requested and partially implemented by @smardine (see pull request https://github.com/Ks89/angular-modal-gallery/pull/162))
+
+
+# 6.2.3
+### Bugfixes
+- when you press the back button, page scroll remains blocked, because the modal gallery isn't completely closed (reported by @srtab #159)
+
+
 # 6.2.2
 ### Bugfixes
 - when you add images asynchronously with the modal gallery already opened, infinite sliding, the arrows, images and previews are managed in the wrong way (reported by @rezo-evodion #157)

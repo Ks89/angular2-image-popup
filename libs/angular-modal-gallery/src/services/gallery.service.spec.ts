@@ -25,12 +25,19 @@
 import { async, inject, TestBed } from '@angular/core/testing';
 
 import { GalleryService } from './gallery.service';
+import { Image } from '@ks89/angular-modal-gallery';
+
+const IMAGE: Image = new Image(0, {
+  // modal
+  img: '../assets/images/gallery/img1.jpg',
+  extUrl: 'http://www.google.com'
+});
 
 const expectedValidNums: any[] = [
-  {id: 0, index: 0},
-  {id: 1, index: 5},
-  {id: 100, index: 12},
-  {id: 2000, index: 1000}
+  {id: 0, index: 0, image: IMAGE},
+  {id: 1, index: 5, image: IMAGE},
+  {id: 100, index: 12, image: IMAGE},
+  {id: 2000, index: 1000, image: IMAGE}
 ];
 
 const badInputs: any[] = [
@@ -110,5 +117,38 @@ describe('GalleryService', () => {
         expect(() => service.closeGallery(undefined)).toThrow(error);
       })
     );
+  });
+
+  describe('#updateGallery()', () => {
+    expectedValidNums.forEach((val, index) => {
+      it(`should call updateGallery expecting an 'update' event with valid numeric parameters. Test i=${index}`,
+        inject([GalleryService], (service: GalleryService) => {
+          service.update.subscribe(result => {
+            expect(result.galleryId).toBe(val.id);
+            expect(result.index).toBe(val.index);
+            expect(result.image).toBe(val.image);
+          });
+          service.updateGallery(val.id, val.index, val.image);
+        })
+      );
+    });
+
+    badInputs.forEach((val, index) => {
+      it(`should throw an error because input params aren't valid. Test i=${index}`,
+        inject([GalleryService], (service: GalleryService) => {
+          const error = new Error('Cannot update gallery via GalleryService with either index<0 or galleryId<0 or galleryId===undefined');
+          expect(() => service.updateGallery(val.id, val.index, IMAGE)).toThrow(error);
+        })
+      );
+    });
+
+    expectedValidNums.forEach((val, index) => {
+      it(`should throw an error because the input image is not valid. Test i=${index}`,
+        inject([GalleryService], (service: GalleryService) => {
+          const error = new Error('Cannot update gallery via GalleryService, because image is not valid');
+          expect(() => service.updateGallery(val.id, val.index, null)).toThrow(error);
+        })
+      );
+    });
   });
 });
