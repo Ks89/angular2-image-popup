@@ -13,7 +13,8 @@
     "importHelpers": true,
     "types": [
       "node",
-      "mousetrap"
+      "mousetrap",
+      "hammerjs"
     ],
     "lib": [
       "dom",

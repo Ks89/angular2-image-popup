@@ -29,6 +29,15 @@ import { DIRECTIVES } from './directives/directives';
 import { COMPONENTS, ModalGalleryComponent, CarouselComponent } from './components/components';
 import { KEYBOARD_CONFIGURATION, KeyboardService } from './services/keyboard.service';
 import { KeyboardServiceConfig } from './model/keyboard-service-config.interface';
+import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
+
+export class MyHammerConfig extends HammerGestureConfig {
+  buildHammer(element: HTMLElement) {
+    return new Hammer(element, {
+      touchAction: 'pan-y'
+    });
+  }
+}
 
 /**
  * Module to import it in the root module of your application.
@@ -36,7 +45,13 @@ import { KeyboardServiceConfig } from './model/keyboard-service-config.interface
 @NgModule({
   imports: [CommonModule],
   declarations: [COMPONENTS, DIRECTIVES],
-  exports: [ModalGalleryComponent, CarouselComponent]
+  exports: [ModalGalleryComponent, CarouselComponent],
+  providers: [
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig
+    }
+  ]
 })
 export class GalleryModule {
   /**
