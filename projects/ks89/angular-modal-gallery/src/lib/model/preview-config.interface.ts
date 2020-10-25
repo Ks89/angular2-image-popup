@@ -29,6 +29,7 @@ import { Size } from './size.interface';
  */
 export interface PreviewConfig {
   visible: boolean;
+  mobileVisible?: boolean;
   number?: number;
   arrows?: boolean;
   clickable?: boolean;
